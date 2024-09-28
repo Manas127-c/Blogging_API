@@ -39,6 +39,22 @@ public class Post {
 	@JoinColumn(name="userid")
 	private User user;
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public int getPostId() {
 		return postId;
 	}
