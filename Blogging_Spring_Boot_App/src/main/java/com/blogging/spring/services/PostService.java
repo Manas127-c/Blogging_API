@@ -9,7 +9,7 @@ public interface PostService {
 	public PostDTO updatePost(PostDTO postDTO,Integer id);
 	public String deletePost(Integer id);
 	public PostDTO getPostById(Integer id);
-	public List<PostDTO> getAllPost();
+	public List<PostDTO> getAllPost(Integer pageNumber,Integer pageSize);
 	public List<PostDTO> getPostByUser(Integer userId);
 	public List<PostDTO> getPostByCategory(Integer categoryId);
 	public List<PostDTO> searchPostByKeyword(String keyword);

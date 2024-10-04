@@ -6,6 +6,14 @@ import jakarta.validation.constraints.Pattern;
 
 public class PostDTO {
 	
+	private int postId;
+	
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
 	@NotEmpty(message = "post title mustbe added")
 	private String postTitle;
 	
