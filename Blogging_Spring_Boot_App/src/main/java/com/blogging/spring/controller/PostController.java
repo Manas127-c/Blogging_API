@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blogging.spring.payload.PostDTO;
+import com.blogging.spring.payload.PostResponse;
 import com.blogging.spring.services.PostService;
 
 import jakarta.validation.Valid;
@@ -52,23 +53,27 @@ public class PostController {
 	}
 	
 	@GetMapping("/posts")
-	public ResponseEntity<List<PostDTO>> getAllPosts(
+	public ResponseEntity<PostResponse> getAllPosts(
 			@RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
 			@RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize
 			){
-		List<PostDTO> pDtos=pService.getAllPost(pageNumber,pageSize);
-		return new ResponseEntity<List<PostDTO>>(pDtos,HttpStatus.OK);
+		 PostResponse pResponse=pService.getAllPost(pageNumber,pageSize);
+		return new ResponseEntity<>(pResponse,HttpStatus.OK);
 	}
 	
 	@GetMapping("user/{userId}/posts")
-	public ResponseEntity<List<PostDTO>> getPostsByUser(@PathVariable Integer userId){
-		List<PostDTO> pDtos=pService.getPostByUser(userId);
-		return new ResponseEntity<List<PostDTO>>(pDtos,HttpStatus.OK);
+	public ResponseEntity<PostResponse> getPostsByUser(@PathVariable Integer userId,
+			@RequestParam(value = "pageNumber",defaultValue = "0",required = false)Integer pageNumber,
+			@RequestParam(value="pageSize",defaultValue = "5",required = false)Integer pageSize){
+		PostResponse pDtos=pService.getPostByUser(userId,pageNumber,pageSize);
+		return new ResponseEntity<PostResponse>(pDtos,HttpStatus.OK);
 	}
 	
 	@GetMapping("category/{categoryId}/posts")
-	public ResponseEntity<List<PostDTO>> getPostsByCategory(@PathVariable Integer categoryId){
-		List<PostDTO> pDtos=pService.getPostByCategory(categoryId);
-		return new ResponseEntity<List<PostDTO>>(pDtos,HttpStatus.OK);
+	public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable Integer categoryId,
+			@RequestParam(value = "pageNumber",defaultValue = "0",required = false)Integer pageNumber,
+			@RequestParam(value="pageSize",defaultValue = "5",required = false)Integer pageSize){
+		PostResponse pDtos=pService.getPostByCategory(categoryId,pageNumber,pageSize);
+		return new ResponseEntity<>(pDtos,HttpStatus.OK);
 	}
 }
