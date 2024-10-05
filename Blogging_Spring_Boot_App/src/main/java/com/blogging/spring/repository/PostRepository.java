@@ -13,4 +13,5 @@ import com.blogging.spring.entities.User;
 public interface PostRepository extends JpaRepository<Post, Integer>{
 	Page<Post> findByUser(User user, Pageable pageable);
 	Page<Post> findByCategory(Category category, Pageable pageable);
+	List<Post> findByPostTitleContaining(String title);
 }

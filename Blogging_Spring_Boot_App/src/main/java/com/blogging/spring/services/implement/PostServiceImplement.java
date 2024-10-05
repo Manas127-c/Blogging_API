@@ -130,8 +130,9 @@ public class PostServiceImplement implements PostService{
 	
 	@Override
 	public List<PostDTO> searchPostByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Post> posts=pRepository.findByPostTitleContaining(keyword);
+		List<PostDTO> pDtos=posts.stream().map((post)->this.postToPostDto(post)).collect(Collectors.toList());
+		return pDtos;
 	}
 	
 	public Post postDtoToPost(PostDTO pDto) {

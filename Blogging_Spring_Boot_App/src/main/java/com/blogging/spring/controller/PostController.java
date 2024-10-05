@@ -78,4 +78,9 @@ public class PostController {
 		PostResponse pDtos = pService.getPostByCategory(categoryId, pageNumber, pageSize);
 		return new ResponseEntity<>(pDtos, HttpStatus.OK);
 	}
+	@GetMapping("/posts/search/{keyword}")
+	public ResponseEntity<List<PostDTO>> searchPosts(@PathVariable("keyword") String keyword){
+		List<PostDTO> pDtos=this.pService.searchPostByKeyword(keyword);
+		return new ResponseEntity<List<PostDTO>>(pDtos,HttpStatus.OK);
+	}
 }
