@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -77,9 +78,8 @@ public class PostServiceImplement implements PostService{
 	}
 
 	@Override
-	public PostResponse getAllPost(Integer pageNumber,Integer pageSize) {
-		
-		Pageable pageable=PageRequest.of(pageNumber,pageSize);//create object as request
+	public PostResponse getAllPost(Integer pageNumber,Integer pageSize,String sortBy,String sortDirection) {
+		Pageable pageable=PageRequest.of(pageNumber, pageSize,sortDirection.equalsIgnoreCase("asc")?Sort.by(sortBy).ascending():Sort.by(sortBy).descending());//create object as request
 		Page<Post> pages=pRepository.findAll(pageable);//get the values as request
 		List<Post> posts=pages.getContent();//set the values in list
 //		List<Post> posts=pRepository.findAll();

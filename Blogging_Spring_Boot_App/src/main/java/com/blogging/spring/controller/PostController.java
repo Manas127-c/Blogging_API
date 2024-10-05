@@ -24,56 +24,58 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("api/")
 public class PostController {
-	
+
 	@Autowired
 	PostService pService;
-	
+
 	@PostMapping("/user/{userId}/category/{categoryId}/post")
-	public ResponseEntity<PostDTO> insertPosts(@Valid @RequestBody PostDTO pDto,@PathVariable Integer userId,@PathVariable Integer categoryId){
-		PostDTO pDto2=pService.createPost(pDto, userId, categoryId);
-		return new ResponseEntity<PostDTO>(pDto2,HttpStatus.CREATED);
+	public ResponseEntity<PostDTO> insertPosts(@Valid @RequestBody PostDTO pDto, @PathVariable Integer userId,
+			@PathVariable Integer categoryId) {
+		PostDTO pDto2 = pService.createPost(pDto, userId, categoryId);
+		return new ResponseEntity<PostDTO>(pDto2, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/posts/{postId}")
-	public ResponseEntity<PostDTO> updatePosts(@Valid @RequestBody PostDTO pDto,@PathVariable Integer postId){
-		PostDTO pDto2=pService.updatePost(pDto, postId);
-		return new ResponseEntity<PostDTO>(pDto2,HttpStatus.ACCEPTED);
+	public ResponseEntity<PostDTO> updatePosts(@Valid @RequestBody PostDTO pDto, @PathVariable Integer postId) {
+		PostDTO pDto2 = pService.updatePost(pDto, postId);
+		return new ResponseEntity<PostDTO>(pDto2, HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/posts/{postId}")
-	public ResponseEntity<String> deletePost(@PathVariable Integer postId){
-		String message=pService.deletePost(postId);
-		return new ResponseEntity<String>(message,HttpStatus.OK);
+	public ResponseEntity<String> deletePost(@PathVariable Integer postId) {
+		String message = pService.deletePost(postId);
+		return new ResponseEntity<String>(message, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/posts/{postId}")
-	public ResponseEntity<PostDTO> getPostById(@PathVariable Integer postId){
-		PostDTO pDto=pService.getPostById(postId);
-		return new ResponseEntity<PostDTO>(pDto,HttpStatus.OK);
+	public ResponseEntity<PostDTO> getPostById(@PathVariable Integer postId) {
+		PostDTO pDto = pService.getPostById(postId);
+		return new ResponseEntity<PostDTO>(pDto, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/posts")
 	public ResponseEntity<PostResponse> getAllPosts(
-			@RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
-			@RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize
-			){
-		 PostResponse pResponse=pService.getAllPost(pageNumber,pageSize);
-		return new ResponseEntity<>(pResponse,HttpStatus.OK);
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
+			@RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy,
+			@RequestParam(value = "sortDirection", defaultValue = "asc", required = false) String sortDirection) {
+		PostResponse pResponse = pService.getAllPost(pageNumber, pageSize, sortBy, sortDirection);
+		return new ResponseEntity<>(pResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("user/{userId}/posts")
 	public ResponseEntity<PostResponse> getPostsByUser(@PathVariable Integer userId,
-			@RequestParam(value = "pageNumber",defaultValue = "0",required = false)Integer pageNumber,
-			@RequestParam(value="pageSize",defaultValue = "5",required = false)Integer pageSize){
-		PostResponse pDtos=pService.getPostByUser(userId,pageNumber,pageSize);
-		return new ResponseEntity<PostResponse>(pDtos,HttpStatus.OK);
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
+		PostResponse pDtos = pService.getPostByUser(userId, pageNumber, pageSize);
+		return new ResponseEntity<PostResponse>(pDtos, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("category/{categoryId}/posts")
 	public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable Integer categoryId,
-			@RequestParam(value = "pageNumber",defaultValue = "0",required = false)Integer pageNumber,
-			@RequestParam(value="pageSize",defaultValue = "5",required = false)Integer pageSize){
-		PostResponse pDtos=pService.getPostByCategory(categoryId,pageNumber,pageSize);
-		return new ResponseEntity<>(pDtos,HttpStatus.OK);
+			@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
+		PostResponse pDtos = pService.getPostByCategory(categoryId, pageNumber, pageSize);
+		return new ResponseEntity<>(pDtos, HttpStatus.OK);
 	}
 }
