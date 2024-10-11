@@ -19,9 +19,6 @@ public class PostDTO {
 	
 	@NotEmpty(message = "post content mustbe added")
 	private String postContent;
-	
-	@NotEmpty(message="Post image must be added")
-	@Pattern(regexp = "^https?://(?:[a-z0-9\\-]+\\.)+[a-z]{2,6}(?:/[^/#?]+)+\\.(?:jpg|gif|png)$",message = "image pattern must be .url,.jpg,.png format")
 	private String postImage;
 	private Date date;
 	public Date getDate() {
