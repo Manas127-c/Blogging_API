@@ -1,7 +1,10 @@
 package com.blogging.spring.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,6 +42,11 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name="userid")
 	private User user;
+	
+	@OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL) 
+	//relation to comment entity
+	//and then pass mappedBy parameter and set cascade to all
+	private Set<Comment> comments=new HashSet<>();
 
 	public Category getCategory() {
 		return category;
