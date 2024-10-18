@@ -23,6 +23,13 @@ public class GlobalExeptionHandler {
 		return new ResponseEntity<ApiResponse>(api,HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(UserNameNotFoundException.class)// it handles custom class exception
+	public ResponseEntity<ApiResponse> userNameNotFoundExceptionHandler(UserNameNotFoundException ex){
+		String message=ex.getMessage();// it get current exception class message
+		ApiResponse api=new ApiResponse(message,false);
+		return new ResponseEntity<ApiResponse>(api,HttpStatus.NOT_FOUND);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String,String>> methodArugment(MethodArgumentNotValidException ex){
 		Map<String, String> resp=new HashMap<>();
