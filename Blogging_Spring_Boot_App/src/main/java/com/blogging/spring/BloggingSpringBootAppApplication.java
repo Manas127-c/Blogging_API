@@ -28,6 +28,6 @@ public class BloggingSpringBootAppApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.pEncoder.encode("manas1010"));
+		System.out.println(this.pEncoder.encode("John1010"));
 	}
 }
