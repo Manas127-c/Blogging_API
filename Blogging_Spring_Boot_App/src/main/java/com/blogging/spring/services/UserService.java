@@ -7,6 +7,7 @@ import com.blogging.spring.payload.UserDTO;
 //In this we create database operation abstract method
 
 public interface UserService {
+	UserDTO registerUser(UserDTO user);
 	UserDTO createUser(UserDTO user);
 	UserDTO updateUser(UserDTO user,Integer id);
 	void deleteUser(Integer id);

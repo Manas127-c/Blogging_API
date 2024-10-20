@@ -6,4 +6,6 @@ public class AppConstsnts {
 	public static final String SORT_BY="postId";
 	public static final String SORT_DIRECTION="asc";
 	public static final long JWT_TOKEN_VALIDITY=5*60*60;
+	public static final Integer ROLE_ID=2;
+	public static final Integer ADMIN_ID=1;
 }

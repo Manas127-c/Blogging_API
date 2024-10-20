@@ -26,7 +26,6 @@ public class UserDTO {
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Email Pattern must be like Username@domain.com")
 	private String email;
 	
-	@JsonIgnore
 	@NotEmpty(message = "Password must not be empty !!")
 	@Size(min = 6, max = 12, message = "Password lenght should be lie between 6 to 12 character !!")
 	@Pattern(regexp = "^[a-zA-Z0-9]{6,12}$", message = "username must be of 6 to 12 length with no special characters")

@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 public class Role {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int rId;
 	
 	private String rName;

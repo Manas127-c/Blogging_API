@@ -30,6 +30,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint{
 	 * 8.Test the application
 	 */
 	
+	
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
@@ -37,6 +38,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint{
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Access Denied");
 		
 	}
+	
+	
 	
 
 }

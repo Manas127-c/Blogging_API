@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.blogging.spring.security.CustomUserDetailsService;
 import com.blogging.spring.security.JwtAuthenticationEntryPoint;
@@ -23,6 +24,7 @@ import com.blogging.spring.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableWebMvc
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 	/*
@@ -40,7 +42,10 @@ public class SecurityConfig {
 	  	set userdetails into .setUserDetailService() and set password using passwordencoder Bean method into 
 	  	.setPasswordEncoder() And then return the object;
 	 
-	  */
+	  */ 
+	
+	private static final String[] URL= {"/api/v1/auth/**","/v3/api-docs/**","/v2/api-docs/**",
+			"/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**"};
 
 	@Autowired
 	private CustomUserDetailsService cService;
@@ -62,7 +67,7 @@ public class SecurityConfig {
 			.csrf()
 			.disable()
 			.authorizeHttpRequests()
-			.requestMatchers("/api/v1/auth/login").permitAll()
+			.requestMatchers(URL).permitAll()
 			.requestMatchers(HttpMethod.GET).permitAll()
 			.anyRequest()
 			.authenticated()
