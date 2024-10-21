@@ -19,8 +19,11 @@ import com.blogging.spring.payload.UserDTO;
 import com.blogging.spring.security.JwtTokenHelper;
 import com.blogging.spring.services.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/auth/")
+@Tag(name = "AuthController",description = "Api's for authentication")
 public class AuthController {
 	
 	@Autowired
