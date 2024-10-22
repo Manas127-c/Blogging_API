@@ -24,7 +24,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
-@RequestMapping("/api/v1/auth")
 @Tag(name = "AuthController",description = "Api's for authentication")
 public class AuthController {
 	
@@ -40,7 +39,7 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/login")
+	@PostMapping("/api/v1/auth/login")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) throws Exception{
 		this.authentication(request.getUsername(),request.getPassword());
 		UserDetails userDetails	= this.uService.loadUserByUsername(request.getUsername());
@@ -50,7 +49,7 @@ public class AuthController {
 		return new ResponseEntity<JwtAuthResponse>(response,HttpStatus.OK);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/api/v1/auth/register")
 	public ResponseEntity<UserDTO> registerNewUser(@RequestBody UserDTO uDto){
 		UserDTO uDto2=this.userService.registerUser(uDto);
 		return new ResponseEntity<UserDTO>(uDto2,HttpStatus.CREATED);
