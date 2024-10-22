@@ -44,7 +44,7 @@ public class SecurityConfig {
 	 
 	  */ 
 	
-	private static final String[] URL= {"/api/v1/auth/**","/v3/api-docs/**","/v2/api-docs/**",
+	private static final String[] URL= {"/api/v1/auth/**","/api/v1/auth/register","/v3/api-docs/**","/v2/api-docs/**",
 			"/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**"};
 
 	@Autowired
