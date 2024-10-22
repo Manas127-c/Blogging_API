@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/users")
+//@RequestMapping("/api/users")
 public class UserController {
 	
 	//use @RequestBody for get value from the client
@@ -33,32 +33,32 @@ public class UserController {
 	@Autowired
 	 UserService uService;
 	
-	@PostMapping("/insert")
+	@PostMapping("/api/users/insert")
 	public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO){
 		UserDTO userDTO2= uService.createUser(userDTO);
 		return new ResponseEntity<>(userDTO2,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update/{userId}")
+	@PutMapping("/api/users/update/{userId}")
 	public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO,@PathVariable Integer userId){
 		UserDTO userDTO2=uService.updateUser(userDTO, userId);
 		return new ResponseEntity<>(userDTO2,HttpStatus.ACCEPTED);
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/delete/{userId}")
+	@DeleteMapping("/api/users/delete/{userId}")
 	public ResponseEntity<String> deleteUser(@PathVariable Integer userId){
 		uService.deleteUser(userId);
 		return new ResponseEntity<>(userId+" id user deleted",HttpStatus.OK);
 	}
 	
-	@GetMapping("/{userId}")
+	@GetMapping("/api/users/{userId}")
 	public ResponseEntity<UserDTO> getUserById(@PathVariable Integer userId){
 		UserDTO userDTO=uService.getUser(userId);
 		return new ResponseEntity<>(userDTO,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("")
+	@GetMapping("/api/users")
 	public ResponseEntity<List<UserDTO>> getAllUsers(){
 		List<UserDTO> userDTOs=uService.getUsers();
 		return new ResponseEntity<>(userDTOs,HttpStatus.OK);

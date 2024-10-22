@@ -21,37 +21,37 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("api/catagories")
+//@RequestMapping("api/catagories")
 public class CategoryController {
 	
 	@Autowired
 	CategoryService cService;
 	
-	@PostMapping("/")
+	@PostMapping("api/catagories/")
 	public ResponseEntity<CategoryDTO> insertCategory(@Valid @RequestBody CategoryDTO cDto){
 		CategoryDTO cDto2=cService.createCategory(cDto);
 		return new ResponseEntity<>(cDto2,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{cId}")
+	@PutMapping("api/catagories/{cId}")
 	public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO cDto,@PathVariable Integer cId){
 		CategoryDTO cDto2=cService.updateCategory(cDto, cId);
 		return new ResponseEntity<>(cDto2,HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/{cId}")
+	@DeleteMapping("api/catagories/{cId}")
 	public ResponseEntity<String> deleteCategory(@PathVariable Integer cId){
 		String messgae= cService.deleteCategoryById(cId);
 		return new ResponseEntity<String>( messgae, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{cId}")
+	@GetMapping("api/catagories/{cId}")
 	public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Integer cId){
 		CategoryDTO cDto=cService.getCategoryById(cId);
 		return new ResponseEntity<CategoryDTO>(cDto, HttpStatus.OK);
 	}
 	
-	@GetMapping("/")
+	@GetMapping("api/catagories/")
 	public ResponseEntity<List<CategoryDTO>> getCategories(){
 		List<CategoryDTO> dtos=cService.getAllCategories();
 		return new ResponseEntity<List<CategoryDTO>>(dtos, HttpStatus.OK);

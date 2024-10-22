@@ -33,7 +33,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("api/")
+//@RequestMapping("api/")
 public class PostController {
 
 	@Autowired
@@ -45,14 +45,14 @@ public class PostController {
 	@Value("${project.image}")
 	private String path;
 
-	@PostMapping("/user/{userId}/category/{categoryId}/post")
+	@PostMapping("api/user/{userId}/category/{categoryId}/post")
 	public ResponseEntity<PostDTO> insertPosts(@Valid @RequestBody PostDTO pDto, @PathVariable Integer userId,
 			@PathVariable Integer categoryId) {
 		PostDTO pDto2 = pService.createPost(pDto, userId, categoryId);
 		return new ResponseEntity<PostDTO>(pDto2, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/posts/{postId}")
+	@PutMapping("api/posts/{postId}")
 	public ResponseEntity<PostDTO> updatePosts(@Valid @RequestBody PostDTO pDto, @PathVariable Integer postId){
 		pDto.setPostImage("default.png");
 		PostDTO pDto2 = pService.updatePost(pDto, postId);
@@ -60,7 +60,7 @@ public class PostController {
 		
 	}
 	
-	@PutMapping("/posts/upload/{postId}")
+	@PutMapping("api/posts/upload/{postId}")
 	public ResponseEntity<PostDTO> updateImage(@RequestParam("image") MultipartFile image,@PathVariable Integer postId) throws IOException{
 		
 		PostDTO pDto=this.pService.getPostById(postId);
@@ -71,26 +71,26 @@ public class PostController {
 		return new ResponseEntity<PostDTO>(pDto,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping(value="post/image/{imageName}",produces=MediaType.IMAGE_JPEG_VALUE)
+	@GetMapping(value="api/post/image/{imageName}",produces=MediaType.IMAGE_JPEG_VALUE)
 	public void downloadImage(@PathVariable String imageName,HttpServletResponse response) throws IOException {
 		InputStream resorse=this.iSevice.getResourses(path, imageName);
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		StreamUtils.copy(resorse, response.getOutputStream());
 	}
 	
-	@DeleteMapping("/posts/{postId}")
+	@DeleteMapping("api/posts/{postId}")
 	public ResponseEntity<String> deletePost(@PathVariable Integer postId) {
 		String message = pService.deletePost(postId);
 		return new ResponseEntity<String>(message, HttpStatus.OK);
 	}
 
-	@GetMapping("/posts/{postId}")
+	@GetMapping("api/posts/{postId}")
 	public ResponseEntity<PostDTO> getPostById(@PathVariable Integer postId) {
 		PostDTO pDto = pService.getPostById(postId);
 		return new ResponseEntity<PostDTO>(pDto, HttpStatus.OK);
 	}
 
-	@GetMapping("/posts")
+	@GetMapping("api/posts")
 	public ResponseEntity<PostResponse> getAllPosts(
 			@RequestParam(value = "pageNumber", defaultValue = AppConstsnts.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = AppConstsnts.PAGE_SIZE, required = false) Integer pageSize,
@@ -100,7 +100,7 @@ public class PostController {
 		return new ResponseEntity<>(pResponse, HttpStatus.OK);
 	}
 
-	@GetMapping("user/{userId}/posts")
+	@GetMapping("api/user/{userId}/posts")
 	public ResponseEntity<PostResponse> getPostsByUser(@PathVariable Integer userId,
 			@RequestParam(value = "pageNumber", defaultValue = AppConstsnts.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = AppConstsnts.PAGE_SIZE, required = false) Integer pageSize) {
@@ -108,14 +108,14 @@ public class PostController {
 		return new ResponseEntity<PostResponse>(pDtos, HttpStatus.OK);
 	}
 
-	@GetMapping("category/{categoryId}/posts")
+	@GetMapping("api/category/{categoryId}/posts")
 	public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable Integer categoryId,
 			@RequestParam(value = "pageNumber", defaultValue = AppConstsnts.PAGE_NUMBER, required = false) Integer pageNumber,
 			@RequestParam(value = "pageSize", defaultValue = AppConstsnts.PAGE_SIZE, required = false) Integer pageSize) {
 		PostResponse pDtos = pService.getPostByCategory(categoryId, pageNumber, pageSize);
 		return new ResponseEntity<>(pDtos, HttpStatus.OK);
 	}
-	@GetMapping("/posts/search/{keyword}")
+	@GetMapping("api/posts/search/{keyword}")
 	public ResponseEntity<List<PostDTO>> searchPosts(@PathVariable("keyword") String keyword){
 		List<PostDTO> pDtos=this.pService.searchPostByKeyword(keyword);
 		return new ResponseEntity<List<PostDTO>>(pDtos,HttpStatus.OK);
