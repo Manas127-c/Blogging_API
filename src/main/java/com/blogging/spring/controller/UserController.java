@@ -21,7 +21,7 @@ import com.blogging.spring.services.UserService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://blogging-api-app.up.railway.app")
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

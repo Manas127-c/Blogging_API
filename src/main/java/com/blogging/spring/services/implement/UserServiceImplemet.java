@@ -61,6 +61,7 @@ public class UserServiceImplemet implements UserService {
 	@Override
 	public void deleteUser(Integer id) {
 		User user=uRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User", "Id", id));
+		
 		uRepository.delete(user);
 	}
 

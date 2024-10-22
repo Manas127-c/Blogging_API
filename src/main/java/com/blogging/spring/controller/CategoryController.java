@@ -19,7 +19,7 @@ import com.blogging.spring.services.CategoryService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://blogging-api-app.up.railway.app")
+
 @RestController
 @RequestMapping("api/catagories")
 public class CategoryController {

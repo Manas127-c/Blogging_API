@@ -31,7 +31,7 @@ import com.blogging.spring.services.PostService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://blogging-api-app.up.railway.app")
+
 @RestController
 @RequestMapping("api/")
 public class PostController {
