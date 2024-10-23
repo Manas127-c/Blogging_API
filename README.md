@@ -1,5 +1,3 @@
-Here's the detailed README description for your GitHub project repository, based on the initial long description I gave:
-
 ---
 
 # Blogging API Backend with Spring Boot
