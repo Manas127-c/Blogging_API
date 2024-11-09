@@ -51,7 +51,7 @@ public class UserServiceImplemet implements UserService {
 		user.setAbout(udto.getAbout());
 		user.setEmail(udto.getEmail());
 		user.setName(udto.getName());
-		user.setPassword(udto.getPassword());
+		user.setPassword(this.passwordEncoder.encode(udto.getPassword()));
 		
 		User updateUser= uRepository.save(user);
 		

@@ -21,6 +21,7 @@ import com.blogging.spring.security.JwtTokenHelper;
 import com.blogging.spring.services.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -50,7 +51,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/api/v1/auth/register")
-	public ResponseEntity<UserDTO> registerNewUser(@RequestBody UserDTO uDto){
+	public ResponseEntity<UserDTO> registerNewUser(@Valid @RequestBody UserDTO uDto){
 		UserDTO uDto2=this.userService.registerUser(uDto);
 		return new ResponseEntity<UserDTO>(uDto2,HttpStatus.CREATED);
 	}

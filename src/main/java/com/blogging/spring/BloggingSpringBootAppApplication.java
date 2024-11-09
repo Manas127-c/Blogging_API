@@ -1,5 +1,7 @@
 package com.blogging.spring;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -7,10 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.blogging.spring.config.AppConstsnts;
 import com.blogging.spring.entities.Role;
 import com.blogging.spring.repository.RoleRepository;
-import java.util.List;
 
 @SpringBootApplication
 public class BloggingSpringBootAppApplication implements CommandLineRunner{
@@ -46,7 +48,7 @@ public class BloggingSpringBootAppApplication implements CommandLineRunner{
 			List<Role> roles=List.of(role1, role2);
 			this.roleRepository.saveAll(roles);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.toString();
 		}
 	}
 }
